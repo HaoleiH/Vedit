@@ -164,6 +164,7 @@ def create_resize_tab(page: ft.Page) -> ft.Container:
     )
 
     return ft.Container(
+        expand=True,
         padding=ft.padding.all(24),
         content=ft.Column(
             spacing=20,
