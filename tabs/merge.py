@@ -47,13 +47,13 @@ def create_merge_tab(page: ft.Page) -> ft.Container:
         text_size=11,
         border_color=ft.Colors.OUTLINE_VARIANT,
     )
-    run_btn = ft.ElevatedButton(
+    run_btn = ft.Button(
         "Merge",
         icon=ft.Icons.MERGE_ROUNDED,
         style=ft.ButtonStyle(
             bgcolor=ft.Colors.PRIMARY,
             color=ft.Colors.ON_PRIMARY,
-            padding=ft.padding.symmetric(horizontal=32, vertical=16),
+            padding=ft.Padding.symmetric(horizontal=32, vertical=16),
             shape=ft.RoundedRectangleBorder(radius=12),
         ),
     )
@@ -86,7 +86,7 @@ def create_merge_tab(page: ft.Page) -> ft.Container:
             row = ft.Container(
                 border_radius=8,
                 bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
-                padding=ft.padding.symmetric(horizontal=12, vertical=6),
+                padding=ft.Padding.symmetric(horizontal=12, vertical=6),
                 content=ft.Row(
                     controls=[
                         ft.Text(f"{i + 1}.", size=13, weight=ft.FontWeight.BOLD, width=30),
@@ -212,13 +212,13 @@ def create_merge_tab(page: ft.Page) -> ft.Container:
 
     run_btn.on_click = run_merge
 
-    add_btn = ft.ElevatedButton(
+    add_btn = ft.Button(
         "Add Files",
         icon=ft.Icons.ADD_ROUNDED,
         on_click=pick_files,
         style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)),
     )
-    clear_btn = ft.OutlinedButton(
+    clear_btn = ft.Button(
         "Clear All",
         icon=ft.Icons.CLEAR_ALL_ROUNDED,
         on_click=clear_files,
@@ -227,7 +227,7 @@ def create_merge_tab(page: ft.Page) -> ft.Container:
 
     return ft.Container(
         expand=True,
-        padding=ft.padding.all(24),
+        padding=ft.Padding.all(24),
         content=ft.Column(
             spacing=20,
             controls=[
@@ -240,9 +240,9 @@ def create_merge_tab(page: ft.Page) -> ft.Container:
                 ft.Divider(height=1, color=ft.Colors.OUTLINE_VARIANT),
                 ft.Row([add_btn, clear_btn, file_count_text], spacing=12),
                 ft.Container(
-                    border=ft.border.all(1, ft.Colors.OUTLINE_VARIANT),
+                    border=ft.Border.all(1, ft.Colors.OUTLINE_VARIANT),
                     border_radius=12,
-                    padding=ft.padding.all(8),
+                    padding=ft.Padding.all(8),
                     content=file_list_view,
                 ),
                 transcode,

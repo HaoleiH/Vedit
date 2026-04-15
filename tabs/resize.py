@@ -73,13 +73,13 @@ def create_resize_tab(page: ft.Page) -> ft.Container:
         text_size=11,
         border_color=ft.Colors.OUTLINE_VARIANT,
     )
-    run_btn = ft.ElevatedButton(
+    run_btn = ft.Button(
         "Resize",
         icon=ft.Icons.ASPECT_RATIO_ROUNDED,
         style=ft.ButtonStyle(
             bgcolor=ft.Colors.PRIMARY,
             color=ft.Colors.ON_PRIMARY,
-            padding=ft.padding.symmetric(horizontal=32, vertical=16),
+            padding=ft.Padding.symmetric(horizontal=32, vertical=16),
             shape=ft.RoundedRectangleBorder(radius=12),
         ),
     )
@@ -165,7 +165,7 @@ def create_resize_tab(page: ft.Page) -> ft.Container:
 
     return ft.Container(
         expand=True,
-        padding=ft.padding.all(24),
+        padding=ft.Padding.all(24),
         content=ft.Column(
             spacing=20,
             controls=[
