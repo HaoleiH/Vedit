@@ -22,6 +22,7 @@ from tabs.compress import create_compress_tab
 from tabs.resize import create_resize_tab
 from tabs.gif import create_gif_tab
 from tabs.merge import create_merge_tab
+from tabs.download import create_download_tab
 
 
 # ── Theme colors ──────────────────────────────────────────────────────────
@@ -66,7 +67,7 @@ async def main(page: ft.Page):
                         ft.Icon(ft.Icons.ERROR_OUTLINE, size=64, color=ft.Colors.ERROR),
                         ft.Text("FFmpeg Not Found", size=28, weight=ft.FontWeight.BOLD),
                         ft.Text(
-                            "Please install FFmpeg and ensure it is available on your system PATH.",
+                            "Please install FFmpeg and ensure it is available on your system PATH or placed in the application folder.",
                             size=14,
                             color=ft.Colors.ON_SURFACE_VARIANT,
                             text_align=ft.TextAlign.CENTER,
@@ -91,6 +92,7 @@ async def main(page: ft.Page):
         lambda: create_resize_tab(page),
         lambda: create_gif_tab(page),
         lambda: create_merge_tab(page),
+        lambda: create_download_tab(page),
     ]
 
     # Lazy tab cache
@@ -163,6 +165,11 @@ async def main(page: ft.Page):
                 icon=ft.Icons.MERGE_OUTLINED,
                 selected_icon=ft.Icons.MERGE_ROUNDED,
                 label="Merge",
+            ),
+            ft.NavigationRailDestination(
+                icon=ft.Icons.DOWNLOAD_OUTLINED,
+                selected_icon=ft.Icons.DOWNLOAD_ROUNDED,
+                label="Download",
             ),
         ],
         leading=ft.Container(

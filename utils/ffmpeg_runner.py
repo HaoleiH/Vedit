@@ -10,6 +10,8 @@ from typing import Callable, Optional
 
 import flet as ft
 
+from utils.exe_resolver import get_executable_path
+
 
 def show_snackbar(page: "ft.Page", message: str, is_error: bool = False):
     """Show a snackbar notification using Flet 0.84+ API."""
@@ -21,8 +23,8 @@ def show_snackbar(page: "ft.Page", message: str, is_error: bool = False):
 
 
 async def check_ffmpeg() -> bool:
-    """Check if ffmpeg is available on the system PATH."""
-    return shutil.which("ffmpeg") is not None
+    """Check if ffmpeg is available on the system PATH or local folder."""
+    return get_executable_path("ffmpeg") is not None
 
 
 async def probe_duration(file_path: str) -> Optional[float]:
@@ -31,8 +33,9 @@ async def probe_duration(file_path: str) -> Optional[float]:
     Returns None if duration cannot be determined.
     """
     try:
+        ffprobe_exe = get_executable_path("ffprobe") or "ffprobe"
         proc = await asyncio.create_subprocess_exec(
-            "ffprobe",
+            ffprobe_exe,
             "-v", "error",
             "-show_entries", "format=duration",
             "-of", "default=noprint_wrappers=1:nokey=1",
@@ -76,12 +79,14 @@ async def run_ffmpeg(
     Returns:
         Tuple of (return_code, stderr_output).
     """
-    # Ensure -y flag is present for overwrite
-    if "-y" not in cmd:
+    if "-y" not in cmd and cmd[0] == "ffmpeg":
         cmd.insert(1, "-y")
 
+    exe = get_executable_path(cmd[0]) or cmd[0]
+    
     process = await asyncio.create_subprocess_exec(
-        *cmd,
+        exe,
+        *cmd[1:],
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
     )
