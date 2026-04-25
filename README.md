@@ -17,6 +17,7 @@ No more memorizing complex command-line flags. Just pick your files, tweak a few
 | 📐 **Resize** | Scale to preset resolutions (4K → 360p) or custom dimensions, with aspect ratio lock |
 | 🎞️ **GIF** | Create high-quality animated GIFs using two-pass palette generation |
 | 🔗 **Merge** | Concatenate multiple videos with drag-to-reorder — supports both stream copy and re-encode modes |
+| ⬇️ **Download** | Download video and audio from various platforms using yt-dlp |
 
 ### Highlights
 
@@ -32,9 +33,12 @@ No more memorizing complex command-line flags. Just pick your files, tweak a few
 
 - **Python 3.10+**
 - **[uv](https://docs.astral.sh/uv/)** — Python package manager
-- **[FFmpeg](https://ffmpeg.org/download.html)** — must be on your system `PATH`
+- **[FFmpeg](https://ffmpeg.org/download.html)** — for media processing
+- **[yt-dlp](https://github.com/yt-dlp/yt-dlp)** — for downloading media
 
-### Verify FFmpeg is installed
+> **Note:** Executables (`ffmpeg.exe`, `ffprobe.exe`, `yt-dlp.exe`) can either be added to your system `PATH` or placed directly in the application's root directory (`flet-test/`).
+
+### Verify installations
 
 ```bash
 ffmpeg -version
@@ -96,9 +100,11 @@ flet-test/
 │   ├── compress.py          # CRF-based video compression
 │   ├── resize.py            # Resolution scaling
 │   ├── gif.py               # Two-pass high-quality GIF creation
-│   └── merge.py             # Concatenate multiple videos
+│   ├── merge.py             # Concatenate multiple videos
+│   └── download.py          # Download media via yt-dlp
 ├── utils/
-│   └── ffmpeg_runner.py     # Async subprocess runner with progress parsing
+│   ├── ffmpeg_runner.py     # Async subprocess runner with progress parsing
+│   └── exe_resolver.py      # Utility to resolve local or system PATH executables
 ├── pyproject.toml
 └── README.md
 ```
